@@ -1,3 +1,4 @@
+import sys
 from PIL import Image, ImageDraw, ImageFont, ImageOps, ImageMath
 from colour import Color
 
@@ -97,5 +98,18 @@ def asciiArt(image_file, output_file, scale=0, bg=(0, 0, 0)):
 
 
 if __name__ == "__main__":
-    img_file = input("enter filename: ")
-    asciiArt(img_file, 'mod_' + img_file, float(input('scale: ')))
+    scale = 1
+    img_filename = None
+    if (len(sys.argv) in (2, 3)):
+        img_filename = sys.argv[1]
+    else:
+        img_filename = input("enter filename: ")
+
+    if (len(sys.argv) == 3):
+        scale = sys.argv[2]
+    else:
+        scale = input("enter scale: ")
+
+    scale = float(scale)
+
+    asciiArt(img_filename, 'out_' + img_filename, scale)
